@@ -1,0 +1,1181 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AnonSpider // Hacktivist - Offensive Security</title>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700;800&display=swap" rel="stylesheet" />
+    <style>
+        /* ===== RESET & BASE ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --void: #07090A;
+            --phosphor: #00ff41;
+            --phosphor-dim: #00aa2a;
+            --alert: #ff3b3b;
+            --bone: #E8E6DC;
+            --fog: #8A94A0;
+            --glow: 0 0 15px rgba(0, 255, 65, 0.4);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--void);
+            color: var(--bone);
+            font-family: "JetBrains Mono", monospace;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* ===== SCANLINES & GRAIN ===== */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: repeating-linear-gradient(0deg,
+                    rgba(0, 0, 0, 0.15) 0px,
+                    rgba(0, 0, 0, 0.15) 2px,
+                    transparent 2px,
+                    transparent 6px);
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        body::after {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJub2lzZSI+PGZlVHVyYnVsZW5jZSB0eXBlPSJmcmFjdGFsTm9pc2UiIGJhc2VGcmVxdWVuY3k9Ii43IiBudW1PY3RhdmVzPSI0IiBzdGl0Y2hUaWxlcz0ic3RpdGNoIi8+PC9maWx0ZXI+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsdGVyPSJ1cmwoI25vaXNlKSIgb3BhY2l0eT0iMC4wNCIvPjwvc3ZnPg==');
+            pointer-events: none;
+            z-index: 9998;
+            opacity: 0.5;
+        }
+
+        /* ===== TERMINAL D'ACCÈS ===== */
+        #terminal-access {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: var(--void);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            padding: 2rem;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+            font-family: "JetBrains Mono", monospace;
+        }
+        #terminal-access.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        #terminal-access .terminal-box {
+            max-width: 680px;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            border: 1px solid var(--phosphor-dim);
+            border-radius: 6px;
+            padding: 2rem 2rem 1.5rem 2rem;
+            box-shadow: var(--glow), inset 0 0 30px rgba(0, 255, 65, 0.03);
+        }
+
+        #terminal-access .term-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(0, 255, 65, 0.2);
+            padding-bottom: 0.6rem;
+            margin-bottom: 1.2rem;
+            color: var(--fog);
+            font-size: 0.7rem;
+            letter-spacing: 1px;
+        }
+        #terminal-access .term-header .dots span {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin-right: 4px;
+        }
+        #terminal-access .term-header .dots .red {
+            background: #ff5f5f;
+        }
+        #terminal-access .term-header .dots .yellow {
+            background: #ffbd2e;
+        }
+        #terminal-access .term-header .dots .green {
+            background: #00ff41;
+        }
+
+        #terminal-access .log-line {
+            color: var(--fog);
+            font-size: 0.85rem;
+            line-height: 1.8;
+            opacity: 0;
+            animation: fadeInLog 0.3s forwards;
+        }
+        #terminal-access .log-line .highlight {
+            color: var(--phosphor);
+        }
+        #terminal-access .log-line .alert {
+            color: var(--alert);
+        }
+
+        @keyframes fadeInLog {
+            0% {
+                opacity: 0;
+                transform: translateY(4px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        #password-prompt {
+            display: none;
+            margin-top: 1.2rem;
+            padding-top: 0.8rem;
+            border-top: 1px solid rgba(0, 255, 65, 0.15);
+        }
+        #password-prompt .prompt-line {
+            color: var(--phosphor);
+            font-size: 0.95rem;
+        }
+        #password-prompt .prompt-line .cursor {
+            animation: blink 0.7s step-end infinite;
+        }
+        #password-input {
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid var(--phosphor-dim);
+            color: var(--bone);
+            font-family: "JetBrains Mono", monospace;
+            font-size: 0.95rem;
+            padding: 4px 8px;
+            width: 60%;
+            outline: none;
+            transition: 0.3s ease;
+        }
+        #password-input:focus {
+            border-bottom-color: var(--phosphor);
+            box-shadow: 0 2px 10px rgba(0, 255, 65, 0.15);
+        }
+        #password-status {
+            font-size: 0.8rem;
+            margin-top: 0.5rem;
+            color: var(--fog);
+            min-height: 1.5rem;
+        }
+        #password-status.granted {
+            color: var(--phosphor);
+        }
+        #password-status.denied {
+            color: var(--alert);
+        }
+
+        #skip-btn {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 10001;
+            background: rgba(0, 255, 65, 0.05);
+            border: 1px solid rgba(0, 255, 65, 0.15);
+            color: var(--fog);
+            padding: 6px 16px;
+            font-family: "JetBrains Mono", monospace;
+            font-size: 0.65rem;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: 0.3s ease;
+            letter-spacing: 1px;
+            backdrop-filter: blur(4px);
+        }
+        #skip-btn:hover {
+            background: rgba(0, 255, 65, 0.15);
+            border-color: var(--phosphor);
+            color: var(--phosphor);
+            box-shadow: var(--glow);
+        }
+
+        /* ===== TICKER ===== */
+        #ticker {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            border-bottom: 1px solid var(--phosphor-dim);
+            padding: 6px 0;
+            overflow: hidden;
+            z-index: 100;
+            backdrop-filter: blur(4px);
+            box-shadow: 0 2px 10px rgba(0, 255, 65, 0.1);
+        }
+        #ticker-track {
+            display: flex;
+            white-space: nowrap;
+            animation: tickerScroll 25s linear infinite;
+            color: var(--phosphor);
+            font-size: 0.75rem;
+            letter-spacing: 1px;
+        }
+        #ticker-track span {
+            margin-right: 3rem;
+            color: var(--fog);
+        }
+        #ticker-track .highlight {
+            color: var(--alert);
+        }
+        @keyframes tickerScroll {
+            0% {
+                transform: translateX(100vw);
+            }
+            100% {
+                transform: translateX(-200%);
+            }
+        }
+
+        /* ===== STATUT BAR ===== */
+        #status-bar {
+            position: fixed;
+            top: 40px;
+            left: 0;
+            width: 100%;
+            padding: 4px 2rem;
+            background: rgba(7, 9, 10, 0.7);
+            backdrop-filter: blur(6px);
+            border-bottom: 1px solid rgba(0, 255, 65, 0.08);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 99;
+            font-size: 0.6rem;
+            color: var(--fog);
+            letter-spacing: 1px;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        #status-bar .stat-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        #status-bar .stat-item .label {
+            color: var(--fog);
+        }
+        #status-bar .stat-item .value {
+            color: var(--phosphor);
+            text-shadow: var(--glow);
+        }
+        #status-bar .stat-item .value.alert {
+            color: var(--alert);
+        }
+
+        /* ===== MAIN LAYOUT ===== */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 110px 2rem 4rem 2rem;
+        }
+
+        /* ===== NAVIGATION ===== */
+        nav {
+            position: fixed;
+            left: 2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 1.8rem;
+            z-index: 50;
+        }
+        nav a {
+            color: var(--fog);
+            text-decoration: none;
+            font-size: 0.7rem;
+            writing-mode: vertical-rl;
+            letter-spacing: 3px;
+            transition: all 0.3s ease;
+            padding: 8px 4px;
+            border-right: 2px solid transparent;
+        }
+        nav a:hover {
+            color: var(--phosphor);
+            border-right-color: var(--phosphor);
+            text-shadow: var(--glow);
+        }
+        nav a .number {
+            color: var(--phosphor-dim);
+            font-weight: 800;
+            margin-right: 4px;
+        }
+
+        /* ===== SECTIONS ===== */
+        section {
+            margin-bottom: 5rem;
+            padding-left: 3rem;
+            border-left: 1px solid rgba(0, 255, 65, 0.15);
+            padding-left: 2rem;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--phosphor);
+            text-shadow: var(--glow);
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .section-title .bracket {
+            color: var(--fog);
+            font-weight: 400;
+        }
+
+        /* ===== HERO HACKTIVISTE ===== */
+        #home .glitch-wrapper {
+            display: inline-block;
+            position: relative;
+        }
+        #home .glitch {
+            font-size: 3.8rem;
+            font-weight: 800;
+            color: var(--phosphor);
+            text-shadow: var(--glow), 2px 2px 0 var(--alert), -2px -2px 0 var(--phosphor);
+            animation: glitchPulse 2.5s infinite alternate;
+            line-height: 1.1;
+            transition: 0.1s ease;
+            display: inline-block;
+        }
+        #home .glitch-wrapper:hover .glitch {
+            animation: glitchDistort 0.3s infinite alternate;
+            text-shadow: var(--glow), 4px 4px 0 var(--alert), -4px -4px 0 var(--phosphor), 2px -4px 0 #00aaff;
+        }
+        @keyframes glitchPulse {
+            0% {
+                text-shadow: var(--glow), 2px 2px 0 var(--alert), -2px -2px 0 var(--phosphor);
+            }
+            100% {
+                text-shadow: var(--glow), -2px -2px 0 var(--alert), 2px 2px 0 var(--phosphor);
+            }
+        }
+        @keyframes glitchDistort {
+            0% {
+                transform: translate(-2px, 1px) skewX(1deg);
+            }
+            25% {
+                transform: translate(3px, -2px) skewX(-1.5deg);
+            }
+            50% {
+                transform: translate(-1px, 3px) skewX(0.5deg);
+            }
+            75% {
+                transform: translate(2px, -1px) skewX(-0.5deg);
+            }
+            100% {
+                transform: translate(-3px, 2px) skewX(1.5deg);
+            }
+        }
+
+        #home .subtitle {
+            color: var(--fog);
+            font-size: 1.1rem;
+            margin-top: 0.5rem;
+            letter-spacing: 2px;
+        }
+        #home .subtitle .status {
+            color: var(--phosphor);
+            animation: blink 1.2s step-end infinite;
+        }
+        .hero-tag {
+            display: inline-block;
+            margin-top: 1.5rem;
+            border: 1px solid var(--phosphor-dim);
+            padding: 0.5rem 1.5rem;
+            font-size: 0.8rem;
+            color: var(--phosphor);
+            background: rgba(0, 255, 65, 0.05);
+            border-radius: 2px;
+            letter-spacing: 1px;
+        }
+
+        /* ===== BIO HACKTIVISTE + LANGUES ===== */
+        .bio-hacktivist {
+            margin-top: 2rem;
+            color: var(--fog);
+            max-width: 780px;
+            font-size: 0.95rem;
+            line-height: 1.9;
+            border-left: 2px solid var(--alert);
+            padding-left: 1.5rem;
+            background: rgba(255, 59, 59, 0.03);
+            border-radius: 0 4px 4px 0;
+        }
+        .bio-hacktivist p {
+            margin-bottom: 0.8rem;
+        }
+        .bio-hacktivist .highlight-red {
+            color: var(--alert);
+        }
+        .bio-hacktivist .highlight-green {
+            color: var(--phosphor);
+        }
+
+        /* Langues connues (badges) */
+        .languages-known {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem 1.5rem;
+            margin-top: 1.5rem;
+            padding: 1rem 1.5rem;
+            background: rgba(0, 255, 65, 0.03);
+            border: 1px solid rgba(0, 255, 65, 0.1);
+            border-radius: 4px;
+        }
+        .languages-known .lang-group {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .languages-known .lang-group .label {
+            font-size: 0.6rem;
+            color: var(--fog);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        .languages-known .lang-group .badge {
+            font-size: 0.75rem;
+            color: var(--bone);
+            background: rgba(0, 255, 65, 0.08);
+            border: 1px solid rgba(0, 255, 65, 0.2);
+            padding: 0.15rem 0.8rem;
+            border-radius: 12px;
+            transition: 0.3s ease;
+        }
+        .languages-known .lang-group .badge:hover {
+            border-color: var(--phosphor);
+            color: var(--phosphor);
+            box-shadow: var(--glow);
+        }
+        .languages-known .lang-group .badge.alert-badge {
+            border-color: rgba(255, 59, 59, 0.3);
+            color: var(--alert);
+        }
+        .languages-known .lang-group .badge.alert-badge:hover {
+            border-color: var(--alert);
+        }
+
+        /* ===== SKILLS (Arsenal) ===== */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+        }
+        .skill-card {
+            background: rgba(0, 255, 65, 0.03);
+            border: 1px solid rgba(0, 255, 65, 0.15);
+            padding: 1.2rem 1.5rem;
+            border-radius: 4px;
+            transition: 0.3s ease;
+        }
+        .skill-card:hover {
+            border-color: var(--phosphor);
+            box-shadow: var(--glow);
+            background: rgba(0, 255, 65, 0.07);
+        }
+        .skill-card .cat {
+            color: var(--fog);
+            font-size: 0.55rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+        .skill-card .name {
+            color: var(--bone);
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin: 6px 0;
+            line-height: 1.4;
+        }
+        .skill-card .level {
+            display: flex;
+            gap: 4px;
+            margin-top: 8px;
+        }
+        .skill-card .level .dot {
+            width: 12px;
+            height: 4px;
+            background: var(--phosphor-dim);
+            border-radius: 2px;
+        }
+        .skill-card .level .dot.full {
+            background: var(--phosphor);
+            box-shadow: var(--glow);
+        }
+
+        /* ===== OPEN SOURCE REPOS ===== */
+        .repo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+        .repo-card {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(0, 255, 65, 0.1);
+            padding: 1.5rem;
+            border-radius: 4px;
+            transition: 0.3s ease;
+        }
+        .repo-card:hover {
+            border-color: var(--phosphor);
+            box-shadow: var(--glow);
+            transform: translateY(-2px);
+        }
+        .repo-card .repo-name {
+            color: var(--phosphor);
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+        .repo-card .repo-name .icon {
+            margin-right: 6px;
+        }
+        .repo-card .repo-desc {
+            color: var(--fog);
+            font-size: 0.8rem;
+            margin: 8px 0 12px 0;
+            line-height: 1.5;
+        }
+        .repo-card .repo-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem 1rem;
+            font-size: 0.65rem;
+        }
+        .repo-card .repo-meta .lang-tag {
+            border: 1px solid rgba(0, 255, 65, 0.15);
+            padding: 0 10px;
+            border-radius: 12px;
+            color: var(--phosphor);
+        }
+        .repo-card .repo-meta .stars {
+            color: var(--fog);
+        }
+        .repo-card .repo-link {
+            color: var(--phosphor);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--phosphor);
+            transition: 0.3s ease;
+            font-size: 0.8rem;
+        }
+        .repo-card .repo-link:hover {
+            color: #fff;
+            border-bottom-color: #fff;
+        }
+
+        /* ===== OPERATIONS ===== */
+        .op-item {
+            background: rgba(0, 0, 0, 0.4);
+            border-left: 3px solid var(--phosphor-dim);
+            padding: 1.5rem 2rem;
+            margin-bottom: 1.5rem;
+            border-radius: 0 4px 4px 0;
+            transition: 0.3s ease;
+        }
+        .op-item:hover {
+            border-left-color: var(--alert);
+            background: rgba(255, 59, 59, 0.05);
+        }
+        .op-item .title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--bone);
+        }
+        .op-item .title .highlight {
+            color: var(--phosphor);
+        }
+        .op-item .desc {
+            color: var(--fog);
+            font-size: 0.85rem;
+            margin: 6px 0 12px 0;
+        }
+        .op-item .meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            font-size: 0.7rem;
+            color: var(--fog);
+        }
+        .op-item .meta .tag {
+            border: 1px solid rgba(0, 255, 65, 0.2);
+            padding: 2px 10px;
+            border-radius: 12px;
+            color: var(--phosphor);
+        }
+        .op-item .meta .tag.alert {
+            border-color: rgba(255, 59, 59, 0.3);
+            color: var(--alert);
+        }
+
+        .classified {
+            filter: blur(3px);
+            user-select: none;
+            transition: 0.4s ease;
+        }
+        .classified:hover {
+            filter: blur(0);
+        }
+
+        /* ===== CONTACT ===== */
+        .contact-links {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+        .contact-links a {
+            color: var(--fog);
+            text-decoration: none;
+            font-size: 1rem;
+            transition: 0.3s ease;
+            border-bottom: 1px dashed transparent;
+            display: inline-block;
+            width: fit-content;
+        }
+        .contact-links a:hover {
+            color: var(--phosphor);
+            border-bottom-color: var(--phosphor);
+            text-shadow: var(--glow);
+        }
+        .contact-links .pgp {
+            color: var(--alert);
+            font-size: 0.75rem;
+            border: 1px solid var(--alert);
+            padding: 0.3rem 1rem;
+            border-radius: 2px;
+            background: rgba(255, 59, 59, 0.05);
+            width: fit-content;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            nav {
+                left: 0.5rem;
+                gap: 1rem;
+            }
+            nav a {
+                font-size: 0.55rem;
+                padding: 4px 2px;
+            }
+            section {
+                padding-left: 1.2rem;
+                margin-bottom: 3rem;
+            }
+            #home .glitch {
+                font-size: 2.4rem;
+            }
+            .container {
+                padding: 120px 1rem 3rem 1rem;
+            }
+            #terminal-access .terminal-box {
+                padding: 1.2rem;
+            }
+            #terminal-access .log-line {
+                font-size: 0.7rem;
+            }
+            #password-input {
+                width: 80%;
+                font-size: 0.8rem;
+            }
+            .skills-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .repo-grid {
+                grid-template-columns: 1fr;
+            }
+            .op-item {
+                padding: 1rem;
+            }
+            #status-bar {
+                font-size: 0.5rem;
+                padding: 4px 1rem;
+                top: 36px;
+                flex-wrap: wrap;
+            }
+            #skip-btn {
+                bottom: 1rem;
+                right: 1rem;
+                font-size: 0.55rem;
+                padding: 4px 12px;
+            }
+            .languages-known {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            nav {
+                flex-direction: row;
+                top: auto;
+                bottom: 1rem;
+                left: 50%;
+                transform: translateX(-50%);
+                gap: 0.6rem;
+                background: rgba(7, 9, 10, 0.9);
+                padding: 0.5rem 0.8rem;
+                border-radius: 30px;
+                border: 1px solid rgba(0, 255, 65, 0.2);
+                backdrop-filter: blur(8px);
+            }
+            nav a {
+                writing-mode: horizontal-tb;
+                font-size: 0.55rem;
+                border-right: none;
+                padding: 4px 6px;
+            }
+            nav a:hover {
+                border-right: none;
+                border-bottom: 2px solid var(--phosphor);
+            }
+            section {
+                padding-left: 0.6rem;
+                border-left: none;
+                border-top: 1px solid rgba(0, 255, 65, 0.1);
+                padding-top: 1.5rem;
+            }
+            #home .glitch {
+                font-size: 1.8rem;
+            }
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+            .repo-grid {
+                grid-template-columns: 1fr;
+            }
+            #ticker-track {
+                animation-duration: 15s;
+                font-size: 0.55rem;
+            }
+            #terminal-access .terminal-box {
+                padding: 1rem;
+                margin: 0 0.5rem;
+            }
+            #terminal-access .log-line {
+                font-size: 0.6rem;
+                line-height: 1.6;
+            }
+            #password-prompt .prompt-line {
+                font-size: 0.8rem;
+            }
+            #password-input {
+                font-size: 0.7rem;
+                width: 70%;
+            }
+            #status-bar {
+                font-size: 0.45rem;
+                padding: 3px 0.5rem;
+                gap: 0.2rem;
+                top: 34px;
+            }
+            #status-bar .stat-item {
+                gap: 3px;
+            }
+            .languages-known .lang-group {
+                flex-wrap: wrap;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== TERMINAL D'ACCÈS ===== -->
+    <div id="terminal-access">
+        <div class="terminal-box">
+            <div class="term-header">
+                <span>⚡ ANONSPIDER // TERMINAL v2.0</span>
+                <div class="dots">
+                    <span class="red"></span>
+                    <span class="yellow"></span>
+                    <span class="green"></span>
+                </div>
+            </div>
+            <div id="log-container"></div>
+            <div id="password-prompt">
+                <div class="prompt-line">
+                    [SYSTEM] Accès restreint. Entrez le mot de passe root : <span id="password-cursor" class="cursor">█</span>
+                </div>
+                <div style="display:flex; align-items:center; gap:10px; margin-top:6px; flex-wrap:wrap;">
+                    <input type="password" id="password-input" autofocus placeholder="mot de passe..." />
+                    <span style="font-size:0.7rem; color:var(--fog);">(appuyez sur Entrée)</span>
+                </div>
+                <div id="password-status"></div>
+            </div>
+        </div>
+        <button id="skip-btn">⏩ [SKIP] Accès rapide</button>
+    </div>
+
+    <!-- ===== TICKER ===== -->
+    <div id="ticker">
+        <div id="ticker-track">
+            <span>// CONNECTION SECURE // NODE-7 RELAY ACTIVE</span>
+            <span>// <span class="highlight">INTRUSION DETECTED</span> // FIREWALL BYPASSED</span>
+            <span>// ANONSPIDER // HACKTIVIST // OFFSEC</span>
+            <span>// PENTEST // RED TEAM // 0x1337</span>
+            <span>// <span class="highlight">LEGALHARVEST ACTIVE</span> // EXFILTRATION OK</span>
+            <span>// CONNECTION SECURE // NODE-7 RELAY ACTIVE</span>
+            <span>// <span class="highlight">INTRUSION DETECTED</span> // FIREWALL BYPASSED</span>
+            <span>// ANONSPIDER // HACKTIVIST // OFFSEC</span>
+            <span>// PENTEST // RED TEAM // 0x1337</span>
+            <span>// <span class="highlight">LEGALHARVEST ACTIVE</span> // EXFILTRATION OK</span>
+        </div>
+    </div>
+
+    <!-- ===== STATUS BAR ===== -->
+    <div id="status-bar">
+        <div class="stat-item">
+            <span class="label">⏱ UTC</span>
+            <span class="value" id="clock">--:--:--</span>
+        </div>
+        <div class="stat-item">
+            <span class="label">⏳ UPTIME</span>
+            <span class="value" id="uptime">00h 00min</span>
+        </div>
+        <div class="stat-item">
+            <span class="label">👾 VISITEURS</span>
+            <span class="value alert" id="visitors">31337</span>
+        </div>
+        <div class="stat-item" style="font-size:0.5rem; color:var(--phosphor-dim);">
+            <span>#ROOT // 0x7F3A</span>
+        </div>
+    </div>
+
+    <!-- ===== NAVIGATION ===== -->
+    <nav>
+        <a href="#home"><span class="number">00</span> HOME</a>
+        <a href="#arsenal"><span class="number">01</span> ARSENAL</a>
+        <a href="#repos"><span class="number">02</span> REPOS</a>
+        <a href="#ops"><span class="number">03</span> OPS</a>
+        <a href="#contact"><span class="number">04</span> CONTACT</a>
+    </nav>
+
+    <!-- ===== MAIN CONTENT ===== -->
+    <div class="container">
+
+        <!-- ============================================================ -->
+        <!-- HOME - BIO HACKTIVISTE + LANGUES CONNUES                       -->
+        <!-- ============================================================ -->
+        <section id="home">
+            <div class="glitch-wrapper">
+                <div class="glitch">ANONSPIDER</div>
+            </div>
+            <div class="subtitle">// Hacktivist & Offensive Security &nbsp;|&nbsp; <span class="status">ACTIVE</span></div>
+            <div class="hero-tag">⚡ ROOT // 0x1337 // <span style="color:var(--alert);">#OpSec</span></div>
+
+            <!-- Bio 100% Hacktiviste -->
+            <div class="bio-hacktivist">
+                <p>
+                    <span class="highlight-red">Hacktiviste</span> et expert en cybersécurité offensive. 
+                    Je traque les failles, contourne les sécurités et <span class="highlight-green">dénonce les silences</span>. 
+                    Mon combat : la transparence, la <span class="highlight-red">vie privée</span> et la libération des données. 
+                    J'opère dans l'ombre pour éclairer les menaces et rétablir une <span class="highlight-green">justice algorithmique</span>.
+                </p>
+                <p>
+                    Spécialisé dans les <span class="highlight-green">opérations d'infiltration éthique</span>, 
+                    l'ingénierie inverse de systèmes propriétaires et le développement d'outils 
+                    <span class="highlight-red">furtifs</span> pour les activistes et les lanceurs d'alerte. 
+                    Je crois en un numérique libre, décentralisé et <span class="highlight-green">hors de portée des regards indiscrets</span>.
+                </p>
+                <p style="font-size:0.8rem; color:var(--alert);">
+                    #CyberResistance #HackThePlanet #OpSec #DataFreedom
+                </p>
+            </div>
+
+            <!-- LANGUES CONNUES (parlées + programmation) -->
+            <div class="languages-known">
+                <div class="lang-group">
+                    <span class="label">🗣️ Parlées</span>
+                    <span class="badge">Français (Natif)</span>
+                    <span class="badge alert-badge">English (Fluent)</span>
+                </div>
+                <div class="lang-group">
+                    <span class="label">💻 Code</span>
+                    <span class="badge">Python</span>
+                    <span class="badge">Rust</span>
+                    <span class="badge">C</span>
+                    <span class="badge">PowerShell</span>
+                    <span class="badge">Bash</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- ARSENAL (Compétences Expert)                                   -->
+        <!-- ============================================================ -->
+        <section id="arsenal">
+            <div class="section-title"><span class="bracket">[</span> ARSENAL <span class="bracket">]</span></div>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <div class="cat">Recon / OSINT</div>
+                    <div class="name">Nmap • Shodan • Recon-ng</div>
+                    <div class="level"><span class="dot full"></span><span class="dot full"></span><span class="dot full"></span><span class="dot full"></span><span class="dot full"></span></div>
+                </div>
+                <div class="skill-card">
+                    <div class="cat">Exploitation & AD</div>
+                    <div class="name">Metasploit • Cobalt Strike • BloodHound</div>
+                    <div class="level"><span class="dot full"></span><span class="dot full"></span><span class="dot full"></span><span class="dot full"></span><span class="dot full"></span></div>
+                </div>
+                <div class="skill-card">
+                    <div class="cat">Web / API</div>
+                    <div class="name">Burp Suite • OWASP Top 10 • GraphQL</div>
+                    <div class="level"><span class="dot full"></span><span class="dot full"></span><span class="dot full"></span><span class="dot full"></span><span class="dot"></span></div>
+                </div>
+                <div class="skill-card">
+                    <div class="cat">Reverse / Malware</div>
+                    <div class="name">Ghidra • IDA Pro • x64dbg • YARA</div>
+                    <div class="level"><span class="dot full"></span><span class="dot full"></span><span class="dot full"></span><span class="dot"></span><span class="dot"></span></div>
+                </div>
+                <div class="skill-card">
+                    <div class="cat">Cloud / Container</div>
+                    <div class="name">AWS • Azure • Docker • K8s</div>
+                    <div class="level"><span class="dot full"></span><span class="dot full"></span><span class="dot full"></span><span class="dot full"></span><span class="dot"></span></div>
+                </div>
+                <div class="skill-card">
+                    <div class="cat">Réseau / Tunneling</div>
+                    <div class="name">Wireshark • Ligolo • Chisel</div>
+                    <div class="level"><span class="dot full"></span><span class="dot full"></span><span class="dot full"></span><span class="dot full"></span><span class="dot full"></span></div>
+                </div>
+                <div class="skill-card">
+                    <div class="cat">Crypto / Forensics</div>
+                    <div class="name">Hashcat • John • FTK</div>
+                    <div class="level"><span class="dot full"></span><span class="dot full"></span><span class="dot full"></span><span class="dot"></span><span class="dot"></span></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- OPEN SOURCE REPOS (NOUVEAU)                                   -->
+        <!-- ============================================================ -->
+        <section id="repos">
+            <div class="section-title"><span class="bracket">[</span> OPEN SOURCE REPOS <span class="bracket">]</span></div>
+            <div class="repo-grid">
+
+                <!-- Repo 1 : LegalHarvest (déjà existant) -->
+                <div class="repo-card">
+                    <div class="repo-name"><span class="icon">📁</span> LegalHarvest</div>
+                    <div class="repo-desc">Implant modulaire de collecte de données furtif. C2 chiffré, exfiltration DNS/HTTPS. FUD.</div>
+                    <div class="repo-meta">
+                        <span class="lang-tag">#Python</span>
+                        <span class="lang-tag">#Stealth</span>
+                        <span class="stars">⭐ 42</span>
+                        <a href="https://github.com/theanonspider/LegalHarvest" class="repo-link" target="_blank">→ Voir le repo</a>
+                    </div>
+                </div>
+
+                <!-- Repo 2 : Placeholder (à remplacer) -->
+                <div class="repo-card">
+                    <div class="repo-name"><span class="icon">📁</span> Recon-X</div>
+                    <div class="repo-desc">Boîte à outils OSINT automatisée pour l'analyse de surface d'attaque et la veille numérique.</div>
+                    <div class="repo-meta">
+                        <span class="lang-tag">#Rust</span>
+                        <span class="lang-tag">#OSINT</span>
+                        <span class="stars">⭐ 21</span>
+                        <span style="color:var(--fog); font-size:0.65rem;">🔒 Privé</span>
+                    </div>
+                </div>
+
+                <!-- Repo 3 : Placeholder (à remplacer) -->
+                <div class="repo-card">
+                    <div class="repo-name"><span class="icon">📁</span> GhostTunnel</div>
+                    <div class="repo-desc">Outil de tunneling et de pivot réseau pour environnements fortement segmentés (Air-gapped).</div>
+                    <div class="repo-meta">
+                        <span class="lang-tag">#C</span>
+                        <span class="lang-tag">#Networking</span>
+                        <span class="stars">⭐ 13</span>
+                        <span style="color:var(--fog); font-size:0.65rem;">🔒 Privé</span>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- OPERATIONS (Projets classifiés)                               -->
+        <!-- ============================================================ -->
+        <section id="ops">
+            <div class="section-title"><span class="bracket">[</span> OPERATIONS <span class="bracket">]</span></div>
+
+            <div class="op-item">
+                <div class="title"><span class="highlight">//</span> LEGALHARVEST <span style="color:var(--alert);">[ACTIVE]</span></div>
+                <div class="desc">Implant modulaire de collecte de données (cookies, mots de passe, cartes). Communication chiffrée via HTTPS + fallback DNS. FUD sur les principaux AV.</div>
+                <div class="meta">
+                    <span class="tag">#Python</span>
+                    <span class="tag">#C2</span>
+                    <span class="tag alert">#Stealth</span>
+                    <span class="tag">#Exfiltration</span>
+                    <span style="color:var(--phosphor);">→ <a href="https://github.com/theanonspider/LegalHarvest" style="color:var(--phosphor);text-decoration:none;border-bottom:1px dotted var(--phosphor);" target="_blank">Dépôt GitHub</a></span>
+                </div>
+            </div>
+
+            <div class="op-item classified">
+                <div class="title"><span class="highlight">[CLASSIFIÉ]</span> OP_GHOST_TRAIL</div>
+                <div class="desc">Analyse forensique d'une APT ciblant le secteur bancaire européen.</div>
+                <div class="meta"><span class="tag alert">#TOP SECRET</span> <span class="tag">#2025</span></div>
+            </div>
+
+            <div class="op-item classified">
+                <div class="title"><span class="highlight">[CLASSIFIÉ]</span> OP_SILENT_ECHO</div>
+                <div class="desc">Développement d'un rootkit pour systèmes embarqués Linux.</div>
+                <div class="meta"><span class="tag alert">#TOP SECRET</span> <span class="tag">#2025</span></div>
+            </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- CONTACT                                                       -->
+        <!-- ============================================================ -->
+        <section id="contact">
+            <div class="section-title"><span class="bracket">[</span> CONTACT <span class="bracket">]</span></div>
+            <div class="contact-links">
+                <a href="mailto:anon.spider@proton.me">✉ anon.spider@proton.me</a>
+                <a href="https://github.com/theanonspider" target="_blank">🐙 GitHub.com/theanonspider</a>
+                <a href="#">🐦 @AnonSpider (X)</a>
+                <div class="pgp">🔑 PGP : 0x7F3A 9B1C DEAD BEEF 1337</div>
+                <p style="margin-top:1rem; font-size:0.75rem; color:var(--fog);">Signaler une vulnérabilité ? Contactez-moi via PGP uniquement.</p>
+            </div>
+        </section>
+
+        <footer style="text-align:center; margin-top:4rem; padding:2rem 0; border-top:1px solid rgba(0,255,65,0.1); color:var(--fog); font-size:0.65rem; letter-spacing:1px;">
+            ANONSPIDER // 0x1337 // <span style="color:var(--phosphor);">ROOT</span> // 2026
+        </footer>
+
+    </div>
+
+    <!-- ===== JAVASCRIPT ===== -->
+    <script>
+        (function() {
+            const terminal = document.getElementById('terminal-access');
+            const logContainer = document.getElementById('log-container');
+            const passwordPrompt = document.getElementById('password-prompt');
+            const passwordInput = document.getElementById('password-input');
+            const passwordStatus = document.getElementById('password-status');
+            const skipBtn = document.getElementById('skip-btn');
+
+            const bootLogs = [
+                { text: '[<span class="highlight">KERNEL</span>] Loading AnonSpider v2.0...', delay: 200 },
+                { text: '[<span class="highlight">NET</span>] Establishing Tor circuit (0x7F3A)...', delay: 400 },
+                { text: '[<span class="highlight">CRYPTO</span>] Verifying PGP keyring (4096-bit)...', delay: 600 },
+                { text: '[<span class="highlight">MEM</span>] Scanning memory zones... <span class="alert">OK</span>', delay: 800 },
+                { text: '[<span class="highlight">FIREWALL</span>] Bypassing IDS/IPS... <span class="alert">BYPASSED</span>', delay: 1000 },
+                { text: '[<span class="highlight">STATUS</span>] <span style="color:var(--phosphor);">System ready. Awaiting authentication.</span>',
+                    delay: 1200 }
+            ];
+
+            let logIndex = 0;
+
+            function displayNextLog() {
+                if (logIndex >= bootLogs.length) {
+                    passwordPrompt.style.display = 'block';
+                    passwordInput.focus();
+                    return;
+                }
+                const log = bootLogs[logIndex];
+                const div = document.createElement('div');
+                div.className = 'log-line';
+                div.innerHTML = log.text;
+                logContainer.appendChild(div);
+                logIndex++;
+                setTimeout(displayNextLog, log.delay);
+            }
+            setTimeout(displayNextLog, 300);
+
+            const SECRET_PASSWORDS = ['root', '0x7F3A'];
+
+            function handlePassword() {
+                const input = passwordInput.value.trim();
+                if (input === '') {
+                    passwordStatus.textContent = '⛔ Entrez un mot de passe.';
+                    passwordStatus.className = 'denied';
+                    return;
+                }
+                if (SECRET_PASSWORDS.includes(input.toLowerCase())) {
+                    passwordStatus.innerHTML = '✅ [GRANTED] // Niveau root // Bienvenue, Commandant.';
+                    passwordStatus.className = 'granted';
+                } else {
+                    passwordStatus.innerHTML = '✅ [ACCESS] // Accès utilisateur standard // Bienvenue.';
+                    passwordStatus.className = 'granted';
+                }
+                setTimeout(() => {
+                    terminal.classList.add('hidden');
+                    startClockAndCounters();
+                }, 600);
+            }
+
+            passwordInput.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    handlePassword();
+                }
+            });
+
+            skipBtn.addEventListener('click', function() {
+                terminal.classList.add('hidden');
+                passwordInput.value = '';
+                startClockAndCounters();
+            });
+
+            let startTime = Date.now();
+            let clockInterval, uptimeInterval;
+
+            function startClockAndCounters() {
+                updateClock();
+                clockInterval = setInterval(updateClock, 1000);
+                updateUptime();
+                uptimeInterval = setInterval(updateUptime, 60000);
+                const visitorsEl = document.getElementById('visitors');
+                const randomVisitors = Math.floor(Math.random() * (9999 - 1337 + 1)) + 1337;
+                visitorsEl.textContent = randomVisitors;
+            }
+
+            function updateClock() {
+                const now = new Date();
+                document.getElementById('clock').textContent =
+                    String(now.getUTCHours()).padStart(2, '0') + ':' +
+                    String(now.getUTCMinutes()).padStart(2, '0') + ':' +
+                    String(now.getUTCSeconds()).padStart(2, '0');
+            }
+
+            function updateUptime() {
+                const elapsed = Math.floor((Date.now() - startTime) / 1000);
+                document.getElementById('uptime').textContent =
+                    String(Math.floor(elapsed / 3600)).padStart(2, '0') + 'h ' +
+                    String(Math.floor((elapsed % 3600) / 60)).padStart(2, '0') + 'min';
+            }
+
+            document.querySelector('footer')?.addEventListener('dblclick', function() {
+                alert('[ACCESS GRANTED] Clé racine : 0xDEADBEEFCAFEBABE');
+            });
+
+            console.log('%c[AnonSpider] %cTerminal déverrouillé.', 'color: #00ff41; font-size: 14px;',
+                'color: #8A94A0;');
+        })();
+    </script>
+</body>
+</html>
