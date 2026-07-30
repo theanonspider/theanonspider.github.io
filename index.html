@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -149,7 +148,7 @@
         </div>
       </section>
 
-      <!-- ===== LANGUES & OUTILS (SANS ÉMOJIS) ===== -->
+      <!-- ===== LANGUES & OUTILS ===== -->
       <section class="languages-known">
         <div class="lang-group">
           <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -269,8 +268,10 @@
     <section id="repos">
       <h2 class="section-title"><span class="bracket">[</span> OPEN SOURCE REPOS <span class="bracket">]</span></h2>
       <div class="repo-grid">
+
+        <!-- LegalHarvest -->
         <article class="repo-card">
-          <h3 class="repo-name"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg> LegalHarvest</h3>
+          <h3 class="repo-name"><svg class="icon" viewBox="0 0 24 24"><use href="assets/icons/folder.svg#icon"/></svg> LegalHarvest</h3>
           <p class="repo-desc">Modular data harvesting implant. Encrypted C2, DNS/HTTPS exfiltration. FUD.</p>
           <div class="repo-meta">
             <span class="lang-tag">#Python</span>
@@ -279,19 +280,27 @@
             <a href="https://github.com/theanonspider/LegalHarvest" class="repo-link" target="_blank">↳ View repo</a>
           </div>
         </article>
+
+        <!-- Recon-X (MIS À JOUR) -->
         <article class="repo-card">
-          <h3 class="repo-name"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg> Recon-X</h3>
+          <h3 class="repo-name">
+            <svg class="icon" viewBox="0 0 24 24"><use href="assets/icons/folder.svg#icon"/></svg>
+            Recon-X
+            <span style="color: var(--phosphor); font-size: 0.6rem; font-weight: 400; margin-left: 0.5rem;">🚀 ACTIVE</span>
+          </h3>
           <p class="repo-desc">Automated OSINT reconnaissance toolkit for attack surface mapping.</p>
           <div class="repo-meta">
-            <span class="lang-tag">#Rust</span>
+            <span class="lang-tag">#Python</span>
             <span class="lang-tag">#OSINT</span>
             <span class="stars">⭐ 0</span>
             <a href="https://github.com/theanonspider/Recon-X" class="repo-link" target="_blank">↳ View repo</a>
-            <span class="private-badge">Private</span>
+            <span class="private-badge">Public</span>
           </div>
         </article>
+
+        <!-- GhostTunnel -->
         <article class="repo-card">
-          <h3 class="repo-name"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg> GhostTunnel</h3>
+          <h3 class="repo-name"><svg class="icon" viewBox="0 0 24 24"><use href="assets/icons/folder.svg#icon"/></svg> GhostTunnel</h3>
           <p class="repo-desc">Pivoting and tunneling tool for air-gapped and heavily segmented environments.</p>
           <div class="repo-meta">
             <span class="lang-tag">#C</span>
@@ -301,8 +310,10 @@
             <span class="private-badge">Private</span>
           </div>
         </article>
+
+        <!-- NexusScan -->
         <article class="repo-card">
-          <h3 class="repo-name"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg> NexusScan</h3>
+          <h3 class="repo-name"><svg class="icon" viewBox="0 0 24 24"><use href="assets/icons/folder.svg#icon"/></svg> NexusScan</h3>
           <p class="repo-desc">High-performance port scanner with service fingerprinting and vulnerability detection.</p>
           <div class="repo-meta">
             <span class="lang-tag">#Go</span>
@@ -312,8 +323,10 @@
             <span class="private-badge">Private</span>
           </div>
         </article>
+
+        <!-- ShadowProxy -->
         <article class="repo-card">
-          <h3 class="repo-name"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg> ShadowProxy</h3>
+          <h3 class="repo-name"><svg class="icon" viewBox="0 0 24 24"><use href="assets/icons/folder.svg#icon"/></svg> ShadowProxy</h3>
           <p class="repo-desc">Encrypted SOCKS5/HTTP proxy with traffic rotation and stealth.</p>
           <div class="repo-meta">
             <span class="lang-tag">#Rust</span>
@@ -323,8 +336,10 @@
             <span class="private-badge">Private</span>
           </div>
         </article>
+
+        <!-- C2-Framework -->
         <article class="repo-card">
-          <h3 class="repo-name"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg> C2-Framework</h3>
+          <h3 class="repo-name"><svg class="icon" viewBox="0 0 24 24"><use href="assets/icons/folder.svg#icon"/></svg> C2-Framework</h3>
           <p class="repo-desc">Lightweight Command &amp; Control framework with encrypted channels and plugins.</p>
           <div class="repo-meta">
             <span class="lang-tag">#Python</span>
@@ -334,6 +349,7 @@
             <span class="private-badge">Private</span>
           </div>
         </article>
+
       </div>
     </section>
 
