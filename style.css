@@ -69,18 +69,21 @@ body::after {
 }
 
 /* ============================================================
-   ACCESS TERMINAL — CORRECTION DU FOND NOIR
+   ACCESS TERMINAL — CORRECTION DÉFINITIVE
    ============================================================ */
 #access-terminal {
   position: fixed;
-  inset: 0;
-  background: #07090A; /* Fond noir en dur */
-  background: var(--void);
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #07090A !important;
+  background: var(--void) !important;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  z-index: 10000;
+  z-index: 100000 !important;
   padding: 2rem;
   transition: opacity 0.8s ease, visibility 0.8s ease;
   font-family: var(--font);
@@ -855,4 +858,4 @@ footer .separator { color: var(--phosphor-dim); }
     top: 2.1rem;
   }
   .languages-known .lang-group { flex-wrap: wrap; }
-}
+}  
