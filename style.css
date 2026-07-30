@@ -69,11 +69,12 @@ body::after {
 }
 
 /* ============================================================
-   ACCESS TERMINAL (splash)
+   ACCESS TERMINAL — CORRECTION DU FOND NOIR
    ============================================================ */
 #access-terminal {
   position: fixed;
   inset: 0;
+  background: #07090A; /* Fond noir en dur */
   background: var(--void);
   display: flex;
   flex-direction: column;
@@ -780,7 +781,7 @@ footer {
 footer .separator { color: var(--phosphor-dim); }
 
 /* ============================================================
-   RESPONSIVE (légères corrections uniquement)
+   RESPONSIVE
    ============================================================ */
 @media (max-width: 64rem) {
   .container { padding: 6rem 1.5rem 3rem 1.5rem; }
