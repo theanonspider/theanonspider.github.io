@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,7 +18,7 @@
   <section id="access-terminal" aria-label="Access terminal">
     <div class="terminal-box">
       <header class="term-header">
-        <span>⚡ ANONSPIDER — SHELL</span>
+        <span>ANONSPIDER — SHELL</span>
         <div class="dots">
           <span class="red"></span>
           <span class="yellow"></span>
@@ -36,7 +37,7 @@
         <div id="password-status"></div>
       </div>
     </div>
-    <button id="skip-btn">⏩ [SKIP] Quick access</button>
+    <button id="skip-btn">[SKIP] Quick access</button>
   </section>
 
   <!-- ===== TICKER ===== -->
@@ -58,17 +59,28 @@
   <!-- ===== STATUS BAR ===== -->
   <header id="status-bar" role="status">
     <div class="stat-item">
-      <svg class="icon" viewBox="0 0 24 24"><use href="assets/icons/clock.svg#icon"/></svg>
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"/>
+        <polyline points="12 6 12 12 16 14"/>
+      </svg>
       <span class="label">UTC</span>
       <span class="value" id="clock">--:--:--</span>
     </div>
     <div class="stat-item">
-      <svg class="icon" viewBox="0 0 24 24"><use href="assets/icons/uptime.svg#icon"/></svg>
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
+        <polyline points="17 6 23 6 23 12"/>
+      </svg>
       <span class="label">UPTIME</span>
       <span class="value" id="uptime">00h 00min</span>
     </div>
     <div class="stat-item">
-      <svg class="icon" viewBox="0 0 24 24"><use href="assets/icons/visitors.svg#icon"/></svg>
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+        <circle cx="9" cy="7" r="4"/>
+        <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+        <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+      </svg>
       <span class="label">VISITORS</span>
       <span class="value alert" id="visitors">31337</span>
     </div>
@@ -97,7 +109,7 @@
         <h1 class="glitch">ANONSPIDER</h1>
       </div>
       <p class="subtitle">↳ Hacktivist &amp; Offensive Security <span class="status">ACTIVE</span></p>
-      <div class="hero-tag">⚡ ROOT — 0x1337 <span class="opsec-tag">#OpSec</span></div>
+      <div class="hero-tag">ROOT — 0x1337 <span class="opsec-tag">#OpSec</span></div>
 
       <article class="bio-hacktivist">
         <p>
@@ -137,16 +149,25 @@
         </div>
       </section>
 
-      <!-- ===== LANGUES & OUTILS ===== -->
+      <!-- ===== LANGUES & OUTILS (SANS ÉMOJIS) ===== -->
       <section class="languages-known">
         <div class="lang-group">
-          <span class="label">🗣️ Spoken</span>
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/>
+            <path d="M12 22c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/>
+            <path d="M12 2c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2z"/>
+          </svg>
+          <span class="label">Spoken</span>
           <span class="badge">French (Native)</span>
           <span class="badge alert-badge">English (Fluent)</span>
           <span class="badge">Spanish (Conversational)</span>
         </div>
         <div class="lang-group">
-          <span class="label">💻 Languages</span>
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="16 18 22 12 16 6"/>
+            <polyline points="8 6 2 12 8 18"/>
+          </svg>
+          <span class="label">Languages</span>
           <span class="badge">Python</span>
           <span class="badge">Rust</span>
           <span class="badge">C</span>
@@ -169,7 +190,12 @@
           <span class="badge">Markdown</span>
         </div>
         <div class="lang-group">
-          <span class="label">🖥️ OS &amp; Tools</span>
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+            <line x1="8" y1="21" x2="16" y2="21"/>
+            <line x1="12" y1="17" x2="12" y2="21"/>
+          </svg>
+          <span class="label">OS &amp; Tools</span>
           <span class="badge">Windows</span>
           <span class="badge">Linux (Kali, Debian, Arch)</span>
           <span class="badge">macOS</span>
@@ -184,67 +210,56 @@
     <section id="arsenal">
       <h2 class="section-title"><span class="bracket">[</span> ARSENAL <span class="bracket">]</span></h2>
       <div class="skills-grid">
-
         <article class="skill-card">
           <h3 class="cat">Recon / OSINT</h3>
           <p class="name">Nmap • Shodan • Recon-ng • Maltego • theHarvester</p>
           <div class="level"><span class="dot full"></span><span class="dot full"></span><span class="dot full"></span><span class="dot full"></span><span class="dot full"></span></div>
         </article>
-
         <article class="skill-card">
           <h3 class="cat">Exploitation &amp; AD</h3>
           <p class="name">Metasploit • Cobalt Strike • BloodHound • Mimikatz • Impacket</p>
           <div class="level"><span class="dot full"></span><span class="dot full"></span><span class="dot full"></span><span class="dot full"></span><span class="dot full"></span></div>
         </article>
-
         <article class="skill-card">
           <h3 class="cat">Web / API</h3>
           <p class="name">Burp Suite • OWASP ZAP • GraphQL • REST • SOAP</p>
           <div class="level"><span class="dot full"></span><span class="dot full"></span><span class="dot full"></span><span class="dot full"></span><span class="dot"></span></div>
         </article>
-
         <article class="skill-card">
           <h3 class="cat">Reverse / Malware</h3>
           <p class="name">Ghidra • IDA Pro • x64dbg • dnSpy • YARA • CAPA</p>
           <div class="level"><span class="dot full"></span><span class="dot full"></span><span class="dot full"></span><span class="dot"></span><span class="dot"></span></div>
         </article>
-
         <article class="skill-card">
           <h3 class="cat">Cloud / Container</h3>
           <p class="name">AWS • Azure • GCP • Docker • K8s • Terraform</p>
           <div class="level"><span class="dot full"></span><span class="dot full"></span><span class="dot full"></span><span class="dot full"></span><span class="dot"></span></div>
         </article>
-
         <article class="skill-card">
           <h3 class="cat">Network / Tunneling</h3>
           <p class="name">Wireshark • Ligolo • Chisel • FRP • SSH Tunneling</p>
           <div class="level"><span class="dot full"></span><span class="dot full"></span><span class="dot full"></span><span class="dot full"></span><span class="dot full"></span></div>
         </article>
-
         <article class="skill-card">
           <h3 class="cat">Crypto / Forensics</h3>
           <p class="name">Hashcat • John the Ripper • FTK • Autopsy • Volatility</p>
           <div class="level"><span class="dot full"></span><span class="dot full"></span><span class="dot full"></span><span class="dot"></span><span class="dot"></span></div>
         </article>
-
         <article class="skill-card">
           <h3 class="cat">Mobile Security</h3>
           <p class="name">Frida • Objection • MobSF • Android Studio • iOS</p>
           <div class="level"><span class="dot full"></span><span class="dot full"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
         </article>
-
         <article class="skill-card">
           <h3 class="cat">Social Engineering</h3>
           <p class="name">SET • GoPhish • Evilginx2 • NGROK</p>
           <div class="level"><span class="dot full"></span><span class="dot full"></span><span class="dot full"></span><span class="dot"></span><span class="dot"></span></div>
         </article>
-
         <article class="skill-card">
           <h3 class="cat">Defensive Bypass</h3>
           <p class="name">AMSI Bypass • EDR Evasion • Obfuscation • Packers</p>
           <div class="level"><span class="dot full"></span><span class="dot full"></span><span class="dot full"></span><span class="dot"></span><span class="dot"></span></div>
         </article>
-
       </div>
     </section>
 
@@ -254,9 +269,8 @@
     <section id="repos">
       <h2 class="section-title"><span class="bracket">[</span> OPEN SOURCE REPOS <span class="bracket">]</span></h2>
       <div class="repo-grid">
-
         <article class="repo-card">
-          <h3 class="repo-name"><svg class="icon" viewBox="0 0 24 24"><use href="assets/icons/folder.svg#icon"/></svg> LegalHarvest</h3>
+          <h3 class="repo-name"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg> LegalHarvest</h3>
           <p class="repo-desc">Modular data harvesting implant. Encrypted C2, DNS/HTTPS exfiltration. FUD.</p>
           <div class="repo-meta">
             <span class="lang-tag">#Python</span>
@@ -265,67 +279,61 @@
             <a href="https://github.com/theanonspider/LegalHarvest" class="repo-link" target="_blank">↳ View repo</a>
           </div>
         </article>
-
         <article class="repo-card">
-          <h3 class="repo-name"><svg class="icon" viewBox="0 0 24 24"><use href="assets/icons/folder.svg#icon"/></svg> Recon-X</h3>
+          <h3 class="repo-name"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg> Recon-X</h3>
           <p class="repo-desc">Automated OSINT reconnaissance toolkit for attack surface mapping.</p>
           <div class="repo-meta">
             <span class="lang-tag">#Rust</span>
             <span class="lang-tag">#OSINT</span>
             <span class="stars">⭐ 0</span>
             <a href="https://github.com/theanonspider/Recon-X" class="repo-link" target="_blank">↳ View repo</a>
-            <span class="private-badge">🔒 Private</span>
+            <span class="private-badge">Private</span>
           </div>
         </article>
-
         <article class="repo-card">
-          <h3 class="repo-name"><svg class="icon" viewBox="0 0 24 24"><use href="assets/icons/folder.svg#icon"/></svg> GhostTunnel</h3>
+          <h3 class="repo-name"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg> GhostTunnel</h3>
           <p class="repo-desc">Pivoting and tunneling tool for air-gapped and heavily segmented environments.</p>
           <div class="repo-meta">
             <span class="lang-tag">#C</span>
             <span class="lang-tag">#Networking</span>
             <span class="stars">⭐ 0</span>
             <a href="https://github.com/theanonspider/GhostTunnel" class="repo-link" target="_blank">↳ View repo</a>
-            <span class="private-badge">🔒 Private</span>
+            <span class="private-badge">Private</span>
           </div>
         </article>
-
         <article class="repo-card">
-          <h3 class="repo-name"><svg class="icon" viewBox="0 0 24 24"><use href="assets/icons/folder.svg#icon"/></svg> NexusScan</h3>
+          <h3 class="repo-name"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg> NexusScan</h3>
           <p class="repo-desc">High-performance port scanner with service fingerprinting and vulnerability detection.</p>
           <div class="repo-meta">
             <span class="lang-tag">#Go</span>
             <span class="lang-tag">#Scanner</span>
             <span class="stars">⭐ 0</span>
             <a href="https://github.com/theanonspider/NexusScan" class="repo-link" target="_blank">↳ View repo</a>
-            <span class="private-badge">🔒 Private</span>
+            <span class="private-badge">Private</span>
           </div>
         </article>
-
         <article class="repo-card">
-          <h3 class="repo-name"><svg class="icon" viewBox="0 0 24 24"><use href="assets/icons/folder.svg#icon"/></svg> ShadowProxy</h3>
+          <h3 class="repo-name"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg> ShadowProxy</h3>
           <p class="repo-desc">Encrypted SOCKS5/HTTP proxy with traffic rotation and stealth.</p>
           <div class="repo-meta">
             <span class="lang-tag">#Rust</span>
             <span class="lang-tag">#Proxy</span>
             <span class="stars">⭐ 0</span>
             <a href="https://github.com/theanonspider/ShadowProxy" class="repo-link" target="_blank">↳ View repo</a>
-            <span class="private-badge">🔒 Private</span>
+            <span class="private-badge">Private</span>
           </div>
         </article>
-
         <article class="repo-card">
-          <h3 class="repo-name"><svg class="icon" viewBox="0 0 24 24"><use href="assets/icons/folder.svg#icon"/></svg> C2-Framework</h3>
+          <h3 class="repo-name"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg> C2-Framework</h3>
           <p class="repo-desc">Lightweight Command &amp; Control framework with encrypted channels and plugins.</p>
           <div class="repo-meta">
             <span class="lang-tag">#Python</span>
             <span class="lang-tag">#C2</span>
             <span class="stars">⭐ 0</span>
             <a href="https://github.com/theanonspider/C2-Framework" class="repo-link" target="_blank">↳ View repo</a>
-            <span class="private-badge">🔒 Private</span>
+            <span class="private-badge">Private</span>
           </div>
         </article>
-
       </div>
     </section>
 
@@ -334,7 +342,6 @@
     <!-- ============================================================ -->
     <section id="ops">
       <h2 class="section-title"><span class="bracket">[</span> OPERATIONS <span class="bracket">]</span></h2>
-
       <article class="op-item">
         <h3 class="title"><span class="highlight">↳</span> LEGALHARVEST <span class="status-badge">[ACTIVE]</span></h3>
         <p class="desc">Modular data harvesting implant (cookies, passwords, credit cards). Encrypted C2, DNS/HTTPS fallback. FUD against major AVs.</p>
@@ -346,19 +353,16 @@
           <span class="repo-link-wrap">↳ <a href="https://github.com/theanonspider/LegalHarvest" target="_blank">GitHub Repo</a></span>
         </div>
       </article>
-
       <article class="op-item classified">
         <h3 class="title"><span class="highlight">[CLASSIFIED]</span> OP_GHOST_TRAIL</h3>
         <p class="desc">Forensic analysis of an APT targeting the European banking sector.</p>
         <div class="meta"><span class="tag alert">#TOP SECRET</span> <span class="tag">#2025</span></div>
       </article>
-
       <article class="op-item classified">
         <h3 class="title"><span class="highlight">[CLASSIFIED]</span> OP_SILENT_ECHO</h3>
         <p class="desc">Rootkit development for embedded Linux systems.</p>
         <div class="meta"><span class="tag alert">#TOP SECRET</span> <span class="tag">#2025</span></div>
       </article>
-
       <article class="op-item classified">
         <h3 class="title"><span class="highlight">[CLASSIFIED]</span> OP_IRON_GATE</h3>
         <p class="desc">Active Directory privilege escalation and persistence framework.</p>
@@ -373,16 +377,29 @@
       <h2 class="section-title"><span class="bracket">[</span> CONTACT <span class="bracket">]</span></h2>
       <div class="contact-links">
         <a href="mailto:anon.spider@proton.me">
-          <svg class="icon" viewBox="0 0 24 24"><use href="assets/icons/mail.svg#icon"/></svg> anon.spider@proton.me
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+            <polyline points="22,6 12,13 2,6"/>
+          </svg>
+          anon.spider@proton.me
         </a>
         <a href="https://github.com/theanonspider" target="_blank">
-          <svg class="icon" viewBox="0 0 24 24"><use href="assets/icons/github.svg#icon"/></svg> GitHub.com/theanonspider
+          <svg class="icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+          </svg>
+          GitHub.com/theanonspider
         </a>
         <a href="#">
-          <svg class="icon" viewBox="0 0 24 24"><use href="assets/icons/x.svg#icon"/></svg> @AnonSpider (X)
+          <svg class="icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+          </svg>
+          @AnonSpider (X)
         </a>
         <div class="pgp">
-          <svg class="icon" viewBox="0 0 24 24"><use href="assets/icons/key.svg#icon"/></svg> PGP : 0x7F3A 9B1C DEAD BEEF 1337
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/>
+          </svg>
+          PGP : 0x7F3A 9B1C DEAD BEEF 1337
         </div>
         <p class="contact-note">Report a vulnerability? Contact me via PGP only.</p>
       </div>
