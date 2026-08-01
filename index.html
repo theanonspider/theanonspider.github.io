@@ -13,7 +13,7 @@
 </head>
 <body>
 
-  <!-- ===== TERMINAL D'ACCÈS ===== -->
+  <!-- ===== TERMINAL ACCESS ===== -->
   <section id="access-terminal" aria-label="Access terminal">
     <div class="terminal-box">
       <header class="term-header">
@@ -101,7 +101,7 @@
   <main class="container">
 
     <!-- ============================================================ -->
-    <!-- HOME                                                          -->
+    <!-- HOME — BIO (ENGLISH)                                          -->
     <!-- ============================================================ -->
     <section id="home">
       <div class="glitch-wrapper">
@@ -128,7 +128,7 @@
         </p>
       </article>
 
-      <!-- ===== TERMINAL INTERACTIF ===== -->
+      <!-- ===== INTERACTIVE TERMINAL ===== -->
       <section class="interactive-terminal" aria-label="Interactive shell">
         <header class="term-header">
           <span>↳ ANONSPIDER — INTERACTIVE SHELL</span>
@@ -148,7 +148,7 @@
         </div>
       </section>
 
-      <!-- ===== LANGUES & OUTILS ===== -->
+      <!-- ===== LANGUAGES & TOOLS ===== -->
       <section class="languages-known">
         <div class="lang-group">
           <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -263,13 +263,13 @@
     </section>
 
     <!-- ============================================================ -->
-    <!-- OPEN SOURCE REPOS                                             -->
+    <!-- OPEN SOURCE REPOS (ALL PROJECTS)                             -->
     <!-- ============================================================ -->
     <section id="repos">
       <h2 class="section-title"><span class="bracket">[</span> OPEN SOURCE REPOS <span class="bracket">]</span></h2>
       <div class="repo-grid">
 
-        <!-- 1. LegalHarvest -->
+        <!-- 1. LegalHarvest (Public) -->
         <article class="repo-card">
           <h3 class="repo-name">
             <svg class="icon" viewBox="0 0 24 24"><use href="assets/icons/folder.svg#icon"/></svg>
@@ -285,14 +285,14 @@
           </div>
         </article>
 
-        <!-- 2. Recon-X -->
+        <!-- 2. Recon-X (Public) -->
         <article class="repo-card">
           <h3 class="repo-name">
             <svg class="icon" viewBox="0 0 24 24"><use href="assets/icons/folder.svg#icon"/></svg>
             Recon-X
             <span style="color: var(--phosphor); font-size: 0.6rem; font-weight: 400; margin-left: 0.5rem;">🚀 ACTIVE</span>
           </h3>
-          <p class="repo-desc">OSINT reconnaissance tool that collects publicly available information about a target domain to map the attack surface before a penetration test.</p>
+          <p class="repo-desc">OSINT reconnaissance tool that collects publicly available information about a target domain to map the attack surface.</p>
           <div class="repo-meta">
             <span class="lang-tag">#Python</span>
             <span class="lang-tag">#OSINT</span>
@@ -302,7 +302,7 @@
           </div>
         </article>
 
-        <!-- 3. Spider-C2 -->
+        <!-- 3. Spider-C2 (Public) -->
         <article class="repo-card">
           <h3 class="repo-name">
             <svg class="icon" viewBox="0 0 24 24"><use href="assets/icons/folder.svg#icon"/></svg>
@@ -319,41 +319,101 @@
           </div>
         </article>
 
-        <!-- 4. GhostTunnel (placeholder privé) -->
+        <!-- 4. VulnForge (NEW Public) -->
         <article class="repo-card">
-          <h3 class="repo-name"><svg class="icon" viewBox="0 0 24 24"><use href="assets/icons/folder.svg#icon"/></svg> GhostTunnel</h3>
-          <p class="repo-desc">Pivoting and tunneling tool for air-gapped and heavily segmented environments.</p>
+          <h3 class="repo-name">
+            <svg class="icon" viewBox="0 0 24 24"><use href="assets/icons/folder.svg#icon"/></svg>
+            VulnForge
+          </h3>
+          <p class="repo-desc">Exploit framework for authorized security testing — Full attack chain automation.</p>
           <div class="repo-meta">
-            <span class="lang-tag">#C</span>
-            <span class="lang-tag">#Networking</span>
+            <span class="lang-tag">#Python</span>
+            <span class="lang-tag">#Exploit</span>
             <span class="stars">⭐ 0</span>
-            <a href="https://github.com/theanonspider/GhostTunnel" class="repo-link" target="_blank">↳ View repo</a>
+            <a href="https://github.com/theanonspider/VulnForge" class="repo-link" target="_blank">↳ View repo</a>
+            <span class="private-badge">Public</span>
+          </div>
+        </article>
+
+        <!-- 5. BlackWipe (NEW Public) -->
+        <article class="repo-card">
+          <h3 class="repo-name">
+            <svg class="icon" viewBox="0 0 24 24"><use href="assets/icons/folder.svg#icon"/></svg>
+            BlackWipe
+          </h3>
+          <p class="repo-desc">Anti-forensic tool for authorized security testing and privacy protection.</p>
+          <div class="repo-meta">
+            <span class="lang-tag">#Python</span>
+            <span class="lang-tag">#AntiForensic</span>
+            <span class="stars">⭐ 0</span>
+            <a href="https://github.com/theanonspider/BlackWipe" class="repo-link" target="_blank">↳ View repo</a>
+            <span class="private-badge">Public</span>
+          </div>
+        </article>
+
+        <!-- 6. WebReaper (NEW Public) -->
+        <article class="repo-card">
+          <h3 class="repo-name">
+            <svg class="icon" viewBox="0 0 24 24"><use href="assets/icons/folder.svg#icon"/></svg>
+            WebReaper
+          </h3>
+          <p class="repo-desc">Advanced phishing simulation framework for authorized security testing.</p>
+          <div class="repo-meta">
+            <span class="lang-tag">#Python</span>
+            <span class="lang-tag">#Phishing</span>
+            <span class="stars">⭐ 0</span>
+            <a href="https://github.com/theanonspider/WebReaper" class="repo-link" target="_blank">↳ View repo</a>
+            <span class="private-badge">Public</span>
+          </div>
+        </article>
+
+        <!-- 7. LegalHarvest-V2 (Private) — replaces GhostTunnel -->
+        <article class="repo-card">
+          <h3 class="repo-name">
+            <svg class="icon" viewBox="0 0 24 24"><use href="assets/icons/folder.svg#icon"/></svg>
+            LegalHarvest-V2
+            <span style="color: var(--alert); font-size: 0.6rem; font-weight: 400; margin-left: 0.5rem;">🔒 V2 (Private)</span>
+          </h3>
+          <p class="repo-desc">Advanced post-exploitation framework with 61 modules (C# .NET Framework).</p>
+          <div class="repo-meta">
+            <span class="lang-tag">#CSharp</span>
+            <span class="lang-tag">#Advanced</span>
+            <span class="stars">⭐ 0</span>
+            <a href="https://github.com/theanonspider/LegalHarvest-V2" class="repo-link" target="_blank">↳ View repo</a>
             <span class="private-badge">Private</span>
           </div>
         </article>
 
-        <!-- 5. NexusScan (placeholder privé) -->
+        <!-- 8. Recon-X-V2 (Private) — replaces NexusScan -->
         <article class="repo-card">
-          <h3 class="repo-name"><svg class="icon" viewBox="0 0 24 24"><use href="assets/icons/folder.svg#icon"/></svg> NexusScan</h3>
-          <p class="repo-desc">High-performance port scanner with service fingerprinting and vulnerability detection.</p>
+          <h3 class="repo-name">
+            <svg class="icon" viewBox="0 0 24 24"><use href="assets/icons/folder.svg#icon"/></svg>
+            Recon-X-V2
+            <span style="color: var(--alert); font-size: 0.6rem; font-weight: 400; margin-left: 0.5rem;">🔒 V2 (Private)</span>
+          </h3>
+          <p class="repo-desc">Next-gen OSINT reconnaissance platform — 24 modules for attack surface mapping.</p>
           <div class="repo-meta">
-            <span class="lang-tag">#Go</span>
-            <span class="lang-tag">#Scanner</span>
+            <span class="lang-tag">#Python</span>
+            <span class="lang-tag">#OSINT</span>
             <span class="stars">⭐ 0</span>
-            <a href="https://github.com/theanonspider/NexusScan" class="repo-link" target="_blank">↳ View repo</a>
+            <a href="https://github.com/theanonspider/Recon-X-V2" class="repo-link" target="_blank">↳ View repo</a>
             <span class="private-badge">Private</span>
           </div>
         </article>
 
-        <!-- 6. ShadowProxy (placeholder privé) -->
+        <!-- 9. Spider-C2-V2 (Private) — replaces ShadowProxy -->
         <article class="repo-card">
-          <h3 class="repo-name"><svg class="icon" viewBox="0 0 24 24"><use href="assets/icons/folder.svg#icon"/></svg> ShadowProxy</h3>
-          <p class="repo-desc">Encrypted SOCKS5/HTTP proxy with traffic rotation and stealth.</p>
+          <h3 class="repo-name">
+            <svg class="icon" viewBox="0 0 24 24"><use href="assets/icons/folder.svg#icon"/></svg>
+            Spider-C2-V2
+            <span style="color: var(--alert); font-size: 0.6rem; font-weight: 400; margin-left: 0.5rem;">🔒 V2 (Private)</span>
+          </h3>
+          <p class="repo-desc">Advanced C2 framework with multi-platform agents (Windows/Linux/macOS).</p>
           <div class="repo-meta">
-            <span class="lang-tag">#Rust</span>
-            <span class="lang-tag">#Proxy</span>
+            <span class="lang-tag">#Python</span>
+            <span class="lang-tag">#C2</span>
             <span class="stars">⭐ 0</span>
-            <a href="https://github.com/theanonspider/ShadowProxy" class="repo-link" target="_blank">↳ View repo</a>
+            <a href="https://github.com/theanonspider/Spider-C2-V2" class="repo-link" target="_blank">↳ View repo</a>
             <span class="private-badge">Private</span>
           </div>
         </article>
@@ -395,7 +455,7 @@
     </section>
 
     <!-- ============================================================ -->
-    <!-- CONTACT (EMAIL CORRIGÉ)                                       -->
+    <!-- CONTACT                                                       -->
     <!-- ============================================================ -->
     <section id="contact">
       <h2 class="section-title"><span class="bracket">[</span> CONTACT <span class="bracket">]</span></h2>
