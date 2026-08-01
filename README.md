@@ -1,38 +1,38 @@
+markdown
+
 ![AnonSpider Banner](image0.png)
 
 ---
 
-## 👋 Hey, I'm AnonSpider
-
 ```bash
-anon@darknet:~$ whoami
+root@anonspider:~$ whoami
 
-➜ Hacktivist | Offensive Security | Privacy Advocate
-bash
+    Hacktivist | Offensive Security | Privacy Advocate
+    Building tools for the resistance.
+    🔗 theanonspider.github.io
 
-anon@darknet:~$ cat /home/anonspider/bio.md
+🧠 What I Actually Do
 
-I operate from the shadows to shed light on threats and restore algorithmic justice.
-Specialized in ethical infiltration operations, reverse engineering, and building stealth tools for activists and whistleblowers.
-bash
+    Offensive Security — Red teaming, adversary simulation, vulnerability research
 
-anon@darknet:~$ cat /home/anonspider/mission.md
+    OSINT & Investigations — SOCMINT, metadata analysis, threat intelligence
 
-My fight: transparency, privacy, and data liberation.
-I believe in a free, decentralized digital world beyond prying eyes.
-⚔️ My Arsenal
-Category	Tools
-Recon / OSINT	Nmap • Shodan • Recon-ng • Maltego • theHarvester
-Exploitation & AD	Metasploit • Cobalt Strike • BloodHound • Mimikatz • Impacket
-Web / API	Burp Suite • OWASP ZAP • GraphQL • REST • SOAP
-Reverse / Malware	Ghidra • IDA Pro • x64dbg • dnSpy • YARA • CAPA
-Cloud / Container	AWS • Azure • GCP • Docker • K8s • Terraform
-Network / Tunneling	Wireshark • Ligolo • Chisel • FRP • SSH Tunneling
-Crypto / Forensics	Hashcat • John the Ripper • FTK • Autopsy • Volatility
-Mobile Security	Frida • Objection • MobSF • Android Studio • iOS
-Social Engineering	SET • GoPhish • Evilginx2 • NGROK
-Defensive Bypass	AMSI Bypass • EDR Evasion • Obfuscation • Packers
-🛠️ Projects
+    Privacy & OPSEC — Digital footprint reduction, anonymity infrastructure
+
+    Building — Security tooling, automation (Python, Rust, C)
+
+    Teaching — Helping others understand the fundamentals
+
+⚔️ Core Competencies
+
+Penetration Testing Red Team OSINT Social Engineering Vulnerability Assessment Adversary Simulation Digital Footprint Reduction OPSEC WAF Configuration Python Rust C
+🗂️ The Record
+
+    20+ operations logged since 2021
+
+    Built and maintained a suite of offensive security tools
+
+🛠️ Projects I've Shipped
 Project	What it does
 LegalHarvest	Post-exploitation data collection tool for authorized security testing.
 Recon-X	OSINT reconnaissance toolkit for attack surface mapping.
@@ -43,21 +43,47 @@ WebReaper	Phishing simulation framework for authorized testing.
 🌐 Core Values
 bash
 
-anon@darknet:~$ cat /principles
+root@anonspider:~$ cat /principles
 
-> PRIVACY — Privacy is not an option, it's a right.
-> FREEDOM — Freedom is defended, not given.
-> JUSTICE — Algorithmic justice for all.
-> EQUALITY — Knowledge belongs to everyone.
-📫 Contact & Links
-bash
+    Privacy is a right. Freedom is defended. Justice is fought for.
 
-anon@darknet:~$ cat /contact
+📫 Find Me
 
     Portfolio : theanonspider.github.io
 
-    GitHub : You're already here.
+    GitHub : github.com/theanonspider
 
     PGP : 0x7F3A 9B1C DEAD BEEF 1337
 
 Information belongs to everyone.
+text
+
+
+---
+
+## ✅ CE QUE TU FAIS
+
+1. **Va sur ton dépôt** `theanonspider`.
+2. **Ouvre `README.md`**.
+3. **Supprime tout** l'ancien contenu.
+4. **Colle** le nouveau README ci-dessus.
+5. **Commit** avec `Update README — spydirbyte style`.
+
+---
+
+## 🎯 CE QUE ÇA DONNE
+
+| Élément | Inspiré de spydirbyte |
+| :--- | :--- |
+| **Terminal factice** | `root@anonspider:~$ whoami` → comme spydirbyte |
+| **Bio courte** | "Hacktivist | Offensive Security" → comme spydirbyte |
+| **Section "What I actually do"** | → comme spydirbyte |
+| **Core Competencies** (badges) | → comme spydirbyte |
+| **The Record** (stats) | → comme spydirbyte |
+| **Tableau des projets** | → comme spydirbyte |
+| **Footer "Find Me"** | → comme spydirbyte |
+
+---
+
+**GO, FRÉROT !** C'est exactement le même style. 🕷️🔥
+
