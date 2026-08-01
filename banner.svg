@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="400" viewBox="0 0 1000 400" style="background-color: #07090A;">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&amp;display=swap');
+
+      text {
+        font-family: 'JetBrains Mono', monospace;
+        fill: #00ff41;
+      }
+
+      /* Effet de frappe (typing) */
+      .line1 {
+        font-size: 28px;
+        font-weight: 700;
+        animation: typing1 2.5s steps(30) 0.5s forwards;
+        overflow: hidden;
+        white-space: nowrap;
+        border-right: 2px solid #00ff41;
+        width: 0;
+      }
+
+      .line2 {
+        font-size: 18px;
+        animation: typing2 2.5s steps(30) 3.5s forwards;
+        overflow: hidden;
+        white-space: nowrap;
+        border-right: 2px solid #00ff41;
+        width: 0;
+      }
+
+      .line3 {
+        font-size: 14px;
+        fill: #8A94A0;
+        animation: typing3 2.5s steps(30) 6.5s forwards;
+        overflow: hidden;
+        white-space: nowrap;
+        width: 0;
+      }
+
+      .cursor {
+        animation: blink 0.8s step-end infinite;
+      }
+
+      @keyframes typing1 {
+        from { width: 0; }
+        to { width: 520px; }
+      }
+      @keyframes typing2 {
+        from { width: 0; }
+        to { width: 400px; }
+      }
+      @keyframes typing3 {
+        from { width: 0; }
+        to { width: 700px; }
+      }
+      @keyframes blink {
+        0%, 100% { border-color: #00ff41; }
+        50% { border-color: transparent; }
+      }
+
+      /* Glow */
+      .glow {
+        text-shadow: 0 0 20px rgba(0, 255, 65, 0.4);
+      }
+    </style>
+  </defs>
+
+  <!-- Ligne 1 : titre -->
+  <text x="50" y="100" class="line1 glow">
+    anon@darknet:~$ whoami
+  </text>
+
+  <!-- Ligne 2 : réponse -->
+  <text x="50" y="160" class="line2" style="fill: #E8E6DC;">
+    ➜ hacktivist // offensive security // root
+  </text>
+
+  <!-- Ligne 3 : phrase de motivation -->
+  <text x="50" y="220" class="line3">
+    "In the shadows, privacy is a right. In the light, we change."
+  </text>
+
+  <!-- Ligne 4 : prompt fixe -->
+  <text x="50" y="300" font-size="16" fill="#8A94A0">
+    anon@darknet:~$ <tspan fill="#00ff41" class="cursor">█</tspan>
+  </text>
+</svg>
